@@ -1,12 +1,7 @@
 import streamlit as st
-import time
-# import smtplib
 from email.mime.text import MIMEText
-# from email.mime.multipart import MIMEMultipart
+import smtplib
 from dotenv import load_dotenv
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-# import os
 import base64
 from requests import HTTPError
 
@@ -15,18 +10,12 @@ load_dotenv()
 
 zoom_url = "https://meet.google.com/hrc-petk-oyo"
 google_cred = {"installed":st.secrets["installed"]}
+sender = "goodguysman@gmail.com"
+reciever = "rijal.suprabhat@gmail.com"
 
 placeholder = st.empty()
 with placeholder.container():
     with st.spinner('Finding an available therapist.'):
-        SCOPES = [
-            "https://www.googleapis.com/auth/gmail.send"
-            ]
-
-        flow = InstalledAppFlow.from_client_config(google_cred, SCOPES)
-        creds = flow.run_local_server(port=0)
-
-        service = build('gmail', 'v1', credentials=creds)
         message = MIMEText(f"""
                            Please click this link to join the therapy session:
                            
@@ -37,7 +26,11 @@ with placeholder.container():
         create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
 
         try:
-            message = (service.users().messages().send(userId="me", body=create_message).execute())
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(sender, st.secrets["APP_PASSWORD"])
+            server.sendmail(sender, reciever, message.as_string())
+            server.quit()
             print(F'sent message to {message} Message Id: {message["id"]}')
         except HTTPError as error:
             print(F'An error occurred: {error}')
