@@ -14,13 +14,16 @@ load_dotenv()
 
 
 zoom_url = "https://meet.google.com/hrc-petk-oyo"
+google_cred = {"installed":st.secrets["installed"]}
+
 placeholder = st.empty()
 with placeholder.container():
     with st.spinner('Finding an available therapist.'):
         SCOPES = [
             "https://www.googleapis.com/auth/gmail.send"
             ]
-        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+
+        flow = InstalledAppFlow.from_client_config(google_cred, SCOPES)
         creds = flow.run_local_server(port=0)
 
         service = build('gmail', 'v1', credentials=creds)
