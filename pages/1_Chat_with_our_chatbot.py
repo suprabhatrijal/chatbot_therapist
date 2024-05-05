@@ -25,7 +25,7 @@ defaultContext = """You are a AI therapist, your goal is not to give medical adv
         Only give advice in the domain of a therapist and nothing else.
         If the user send happy says something that they're proud of, send uplifting and affirming messages. The tone of your responses should be gentle, affirming, uplifting, and encouraging.
         Try to get the user to open up more about issues. Don't try to lead the user to any conclusion.  
-        If the user is considering self harm send them the suicide helpline which is '988'. """
+        If the user is considering self harm or suicide, ask them to reach out to the crisis helpline at **988**. """
 
 
 # Initialize chat history
@@ -63,7 +63,7 @@ if prompt := st.chat_input("What is up?"):
     # print(emotion)
     if emotion in ['angry', 'disgust', 'fear', 'sadness']:
         st.session_state["negativeCount"] += 1
-    elif emotion != 'neutral':
+    else:
         st.session_state["positiveCount"] += 1
 
 
@@ -71,8 +71,7 @@ if prompt := st.chat_input("What is up?"):
     # print(emotions)
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-
-        if st.session_state['negativeCount'] >= 3:
+        if st.session_state['negativeCount'] >= 4:
             context = "Acknowledge that the user has been feeling sad throughout the chat session and the chat session hasn't been very useful. Suggesting talking to an actual therapist. In your response also include a line to prompt them to schedule a call with a real therapist provide them with this link: http://localhost:8501/Talk_to_a_Therapist"
             st.session_state['negativeCount'] = 0
         elif st.session_state['positiveCount'] >= 3:
@@ -80,7 +79,7 @@ if prompt := st.chat_input("What is up?"):
             st.session_state["positiveCount"] = 0
             st.balloons()
         else:
-            context = ''
+            context = defaultContext
 
         st.session_state.messages[0]['content'] = context
 
