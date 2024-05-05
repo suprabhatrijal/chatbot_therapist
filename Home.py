@@ -112,6 +112,7 @@ step = sac.steps(
 
         sac.StepsItem(title='step 3'),
     ], 
+    format_func='title', variant='navigation'
 
 )
 
@@ -133,6 +134,8 @@ elif step== "step 2":
         if message["role"] != "system":
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
+    st.button("Previous")
+    st.button("Next")
     st.divider()
 elif step== "step 3":
     st.balloons()
