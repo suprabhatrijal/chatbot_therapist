@@ -37,6 +37,7 @@ with placeholder.container():
             message = None
 
 with placeholder.container():
-    st.link_button('Talk to a therapist', zoom_url)
+    st.header("Talk to a therapist")
+    st.link_button('Click here to talk to a therapist', zoom_url)
     
 
