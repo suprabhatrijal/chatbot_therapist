@@ -4,6 +4,7 @@ import streamlit as st
 st.title("Therhappy App")
 
 st.subheader("How to best use our app:")
+self_url = st.secrets["URL"]
 
 if "demo_messages" not in st.session_state:
     st.session_state.demo_messages = [{
@@ -56,7 +57,7 @@ if "demo_messages2" not in st.session_state:
         },    
         {
             'role': "assistant",
-            'content': "I understand that you've been feeling sad throughout our chat session, and I'm sorry that our conversation hasn't been very helpful. It's important to prioritize your well-being, and talking to a mental health professional might offer you the support you need. Consider scheduling a call with a real therapist for a more personalized and effective guidance. You can use this link to connect with a therapist: http://localhost:8501/Talk_to_a_Therapist. Take care."
+            'content': f"I understand that you've been feeling sad throughout our chat session, and I'm sorry that our conversation hasn't been very helpful. It's important to prioritize your well-being, and talking to a mental health professional might offer you the support you need. Consider scheduling a call with a real therapist for a more personalized and effective guidance. You can use this link to connect with a therapist: {self_url}/Talk_to_a_Therapist. Take care."
         },    
 
     ]
@@ -93,7 +94,7 @@ if "demo_messages3" not in st.session_state:
         },    
         {
             'role': "assistant",
-            'content': "I understand that you've been feeling sad throughout our chat session, and I'm sorry that our conversation hasn't been very helpful. It's important to prioritize your well-being, and talking to a mental health professional might offer you the support you need. Consider scheduling a call with a real therapist for a more personalized and effective guidance. You can use this link to connect with a therapist: http://localhost:8501/Talk_to_a_Therapist. Take care."
+            'content': f"I understand that you've been feeling sad throughout our chat session, and I'm sorry that our conversation hasn't been very helpful. It's important to prioritize your well-being, and talking to a mental health professional might offer you the support you need. Consider scheduling a call with a real therapist for a more personalized and effective guidance. You can use this link to connect with a therapist: {self_url}/Talk_to_a_Therapist. Take care."
         },    
         {
             'role': "user",
