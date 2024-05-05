@@ -66,10 +66,9 @@ if prompt := st.chat_input("What is up?"):
     else:
         st.session_state["positiveCount"] += 1
 
-
-    # print(st.session_state["negativeCount"])
-    # print(emotions)
-    # Display assistant response in chat message container
+    with open("emotions.csv", "a") as emotion:
+        emotion.write(f"{last_user_text},{emotion}\n")
+    
     with st.chat_message("assistant"):
         if st.session_state['negativeCount'] >= 4:
             context = "Acknowledge that the user has been feeling sad throughout the chat session and the chat session hasn't been very useful. Suggesting talking to an actual therapist. In your response also include a line to prompt them to schedule a call with a real therapist provide them with this link: http://localhost:8501/Talk_to_a_Therapist"
