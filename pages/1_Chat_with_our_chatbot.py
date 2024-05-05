@@ -14,6 +14,7 @@ client = OpenAI()
 url = 'https://api.apilayer.com/text_to_emotion'
 
 st.title("Therhappy App")
+self_url = st.secrets["URL"]
 
 if "positiveCount" not in st.session_state:
     st.session_state['positiveCount'] = 0
@@ -71,7 +72,7 @@ if prompt := st.chat_input("What is up?"):
     
     with st.chat_message("assistant"):
         if st.session_state['negativeCount'] >= 4:
-            context = "Acknowledge that the user has been feeling sad throughout the chat session and the chat session hasn't been very useful. Suggesting talking to an actual therapist. In your response also include a line to prompt them to schedule a call with a real therapist provide them with this link: http://localhost:8501/Talk_to_a_Therapist"
+            context = f"Acknowledge that the user has been feeling sad throughout the chat session and the chat session hasn't been very useful. Suggesting talking to an actual therapist. In your response also include a line to prompt them to schedule a call with a real therapist provide them with this link: {self_url}/Talk_to_a_Therapist"
             st.session_state['negativeCount'] = 0
         elif st.session_state['positiveCount'] >= 3:
             context = "Tell them that you notice that the user has been feeling happy for a while now. Ask them if this chat session has been helpful"
