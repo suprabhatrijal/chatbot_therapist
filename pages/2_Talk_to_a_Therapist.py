@@ -8,8 +8,7 @@ from requests import HTTPError
 load_dotenv()
 
 
-zoom_url = "https://meet.google.com/hrc-petk-oyo"
-google_cred = {"installed":st.secrets["installed"]}
+zoom_url = "https://meet.google.com/bqh-mqfp-iwi"
 sender = "goodguysman@gmail.com"
 reciever = "rijal.suprabhat@gmail.com"
 

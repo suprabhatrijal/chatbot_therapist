@@ -67,8 +67,8 @@ if prompt := st.chat_input("What is up?"):
     else:
         st.session_state["positiveCount"] += 1
 
-    with open("emotions.csv", "a") as emotion:
-        emotion.write(f"{last_user_text},{emotion}\n")
+    with open("emotions.csv", "a") as emotion_file:
+        emotion_file.write(f"{last_user_text},{emotion}\n")
     
     with st.chat_message("assistant"):
         if st.session_state['negativeCount'] >= 4:
